@@ -5,7 +5,7 @@ export enum EventActions {
   BLOCK,
   START,
   END,
-  RESET
+  RESET,
 }
 
 @Component({
@@ -15,6 +15,7 @@ export enum EventActions {
 })
 export class ControllersComponent implements OnInit {
   @Output() action = new EventEmitter<EventActions>()
+  public actionMessage: string;
 
   constructor() { }
 
@@ -23,10 +24,12 @@ export class ControllersComponent implements OnInit {
 
   run(){
     this.action.emit(EventActions.RUN)
+    this.actionMessage = ''
   }
 
   block(){
     this.action.emit(EventActions.BLOCK)
+    this.actionMessage = 'Select cells to block'
   }
 
   reset(){
@@ -35,10 +38,12 @@ export class ControllersComponent implements OnInit {
 
   start(){
     this.action.emit(EventActions.START)
+    this.actionMessage = 'Select starting cell'
   }
 
   end(){
     this.action.emit(EventActions.END)
+    this.actionMessage = 'Select end cell'
   }
 
 }

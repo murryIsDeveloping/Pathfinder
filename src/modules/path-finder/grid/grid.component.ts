@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PathFinder, findPathGenerator, showPathGenerator, PathNode } from '../path-node';
+import { Component, OnInit, Inject, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { PathFinder, findPathGenerator, showPathGenerator, PathNode, noPathGenerator, resetGenerator } from '../path-node';
 import { interval, Subscription } from 'rxjs';
 import { EventActions } from '../controllers/controllers.component';
 
@@ -12,6 +12,7 @@ export class GridComponent implements OnInit {
   public pathFinder: PathFinder = new PathFinder(30, 20);
   private actionType: EventActions;
   private animationSubscription: Subscription;
+  public noPath: boolean;
 
   constructor() { }
 
@@ -52,8 +53,39 @@ export class GridComponent implements OnInit {
       let next = findPath.next()
       if (next.done){
         this.animationSubscription.unsubscribe()
+        if (!next.value) {
+          this.noPathAnimation()
+          return
+        }
         const showPath = showPathGenerator(next.value)
         this.pathAnimation(showPath)
+      }
+    });
+  }
+
+  public noPathAnimation(){
+    const noPath = noPathGenerator(this.pathFinder)
+    const animationTimer$ = interval(15);
+    this.animationSubscription = animationTimer$.subscribe((_) => {
+      let next = noPath.next()
+      if (next.done){
+        this.animationSubscription.unsubscribe()
+        this.noPath = true;
+        setTimeout(() => {
+          this.resetAnimation()
+          this.noPath = false
+        }, 3000)
+      }
+    });
+  }
+
+  public resetAnimation(){
+    const reset = resetGenerator(this.pathFinder)
+    const animationTimer$ = interval(15);
+    this.animationSubscription = animationTimer$.subscribe((_) => {
+      let next = reset.next()
+      if (next.done){
+        this.animationSubscription.unsubscribe()
       }
     });
   }
@@ -78,6 +110,7 @@ export class GridComponent implements OnInit {
         this.pathFinder.toggleEnd(node)
         break;
       case EventActions.BLOCK:
+        if(node !== this.pathFinder.end && node !== this.pathFinder.start)
         node.toggleBlocked()
         break;
       default:

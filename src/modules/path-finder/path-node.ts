@@ -9,7 +9,7 @@ export class PathNode {
   private checked: boolean = false;
   public weighting: number;
   public parent: PathNode;
-  public classes: string[] = ['', ''];
+  public classes: string[] = ['', '', ''];
 
   constructor() {}
 
@@ -52,14 +52,20 @@ export class PathFinder {
   public grid: PathNode[][];
   public start: PathNode;
   public end: PathNode;
+  private width: number;
+  private height: number;
 
   constructor(width: number, height: number) {
-    this.createGrid(width, height);
+    this.height = height;
+    this.width = width;
+    this.createGrid();
   }
 
   public reset(){
     this.grid.map(row => row.forEach(x => {
       if(!x.isBlocked){
+        x.parent = null
+        x.weighting = null
         x.uncheck()
       }
     }))
@@ -71,17 +77,17 @@ export class PathFinder {
       : null;
   }
 
-  public createGrid(width: number, height: number) {
+  public createGrid() {
     this.grid = [];
-    for (let i = 0; i < height; i++) {
-      let row = new Array(width).fill(0).map((_) => new PathNode());
+    for (let i = 0; i < this.height; i++) {
+      let row = new Array(this.width).fill(0).map((_) => new PathNode());
       row.forEach((node, index) => node.setPosition(i, index));
       this.grid.push(row);
     }
   }
 
   private setStart(node: PathNode) {
-    if (node) {
+    if (node && !node.isBlocked) {
       this.start = node;
       node.weighting = 0;
       node.check();
@@ -106,7 +112,7 @@ export class PathFinder {
   }
 
   private setEnd(node: PathNode) {
-    if (node) {
+    if (node && !node.isBlocked) {
       this.end = node;
       node.classes[1] = 'end';
     }
@@ -129,19 +135,33 @@ export class PathFinder {
   }
 }
 
+export function* resetGenerator(pathFinder: PathFinder) {
+  for(let row of pathFinder.grid) {
+    for(let cell of row) {
+      if(!cell.isBlocked){
+        cell.uncheck()
+      }
+      cell.classes[2] = ''
+    }
+    yield 
+  }
+}
+
+export function* noPathGenerator(pathFinder: PathFinder) {
+  for(let row of pathFinder.grid) {
+    for(let cell of row) {
+      cell.classes[2] = 'no-path'
+    }
+    yield 
+  }
+}
+
 export function* showPathGenerator(node: PathNode) {
   const path = node.path();
   for (let i = 0; i < path.length; i++) {
     path[i].classes[0] = 'active';
     yield path[i]
   }
-
-  // while (node.parent) {
-  //   node.parent.classes[1] = 'end';
-  //   node.parent.classes[0] = 'active';
-  //   node = node.parent;
-  //   yield node;
-  // }
 
   return path[path.length-1];
 }
@@ -191,10 +211,15 @@ export function* findPathGenerator(pathFinder: PathFinder) {
         nextNode = x;
       }
     });
+
+    if(!nextNode){
+      return null
+    }
+
     nextNode.check();
     currentNode = nextNode;
     yield nextNode;
   }
 
-  return currentNode;
+  return null;
 }
