@@ -31,7 +31,7 @@ export class GridComponent implements OnInit {
         break;
       case EventActions.RESET:
         this.animationUnsubscribe();
-        this.pathFinder.reset()
+        this.resetAnimation()
         break;
       default:
         return 
