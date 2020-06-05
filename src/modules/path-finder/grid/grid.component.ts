@@ -48,7 +48,7 @@ export class GridComponent implements OnInit {
   public findAnimation(){
     this.pathFinder.reset()
     const findPath = findPathGenerator(this.pathFinder)
-    const animationTimer$ = interval(20);
+    const animationTimer$ = interval(10);
     this.animationSubscription = animationTimer$.subscribe((_) => {
       let next = findPath.next()
       if (next.done){
