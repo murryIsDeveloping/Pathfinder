@@ -1,7 +1,12 @@
-import { Component, OnInit, Inject, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
-import { PathFinder, findPathGenerator, showPathGenerator, PathNode, noPathGenerator, resetGenerator } from '../path-node';
+import { Component, OnInit } from '@angular/core';
+import { PathNode } from '../path-node';
 import { interval, Subscription } from 'rxjs';
 import { EventActions } from '../controllers/controllers.component';
+import { PathFinder } from '../path-finder';
+import { findPathGenerator } from '../generators/desktra';
+import { showPathGenerator } from '../generators/show-path';
+import { noPathGenerator } from '../generators/no-path';
+import { resetGenerator } from '../generators/reset';
 
 @Component({
   selector: 'app-grid',
@@ -91,7 +96,7 @@ export class GridComponent implements OnInit {
   }
 
   public pathAnimation(generator: Generator<PathNode, PathNode>){
-    const animationTimer$ = interval(150);
+    const animationTimer$ = interval(50);
     this.animationSubscription = animationTimer$.subscribe((_) => {
       let next = generator.next()
       if (next.done){
