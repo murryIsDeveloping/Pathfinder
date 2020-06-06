@@ -84,8 +84,10 @@ export function* findPathGenerator(pathFinder: PathFinder) {
 }
 
 function nextWaypointFunction(pathFinder: PathFinder) {
-  let waypoints = JSON.parse(JSON.stringify(pathFinder.waypoints));
+  const themes = ['theme-one', 'theme-two', 'theme-three']
+  const waypoints = JSON.parse(JSON.stringify(pathFinder.waypoints));
   return () => {
+    pathFinder.theme = themes[waypoints.length % 3]
     let point = waypoints.shift();
     return point ? pathFinder.getNode(point) : null;
   };

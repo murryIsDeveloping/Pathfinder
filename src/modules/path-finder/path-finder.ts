@@ -7,6 +7,7 @@ export class PathFinder {
     private width: number;
     private height: number;
     public waypoints: Point[] = [];
+    public theme: string = 'theme-one'
   
     constructor(width: number, height: number) {
       this.height = height;

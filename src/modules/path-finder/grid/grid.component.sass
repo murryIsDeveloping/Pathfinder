@@ -9,12 +9,42 @@
     height: 1000px
     font-size: 1rem
 
+    &.theme-one
+        .path
+            background: map-get($theme1, "champangne-pink")
+
+            &.checked 
+                background: map-get($theme1, "platinum")
+
+            &.start, &.end, &.active, &.waypoint
+                background: map-get($theme1, "copper-red")
+
+
+    &.theme-two
+        .path
+            background: map-get($theme2, "baby-blue-eyes")
+
+            &.checked 
+                background: map-get($theme2, "alice-blue")
+
+            &.start, &.end, &.active, &.waypoint
+                background: map-get($theme2, "violet-blue-crayola")
+        
+    &.theme-three
+        .path
+            background: map-get($theme3, "honeydew")
+
+            &.checked 
+                background: map-get($theme3, "pale-cerulean")
+
+            &.start, &.end, &.active, &.waypoint
+                background: map-get($theme3, "cameo-pink")
+
 .row
     display: flex
     -webkit-user-drag: none
     
 .path
-    background: map-get($colors, "champangne-pink")
     color: white
     font-weight: bold
     flex: 1 0 auto
@@ -28,7 +58,6 @@
 
     &.checked 
         transform: scale(0.7)
-        background: map-get($colors, "platinum")
 
     &.blocked
         background: map-get($colors, "nickel")
@@ -40,18 +69,16 @@
         box-shadow: 0px 0 10px -2px rgba(0,0,0,0.3)
 
     &.start, &.end, &.active, &.waypoint
-       background: map-get($colors, "copper-red")
        transform: scale(1.1)
     
     &.no-path 
-        background: map-get($colors, "copper-penny")
+        background: map-get($theme1, "copper-penny")
         transform: scale(0.9)
         box-shadow: 0px 0 0 -0 rgba(0,0,0,0)
-
-
+        
     &::after
         content: ""
-        float:left
+        float: left
         display: block
         padding-top: 100%
 
