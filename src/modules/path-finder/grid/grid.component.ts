@@ -28,7 +28,6 @@ export class GridComponent implements OnInit {
 
   public action($event: EventActions){
     this.actionType = $event;
-    console.log(this.actionType)
     switch($event) {
       case EventActions.RUN:
         this.animationUnsubscribe();
@@ -117,6 +116,10 @@ export class GridComponent implements OnInit {
       case EventActions.BLOCK:
         if(node !== this.pathFinder.end && node !== this.pathFinder.start)
         node.toggleBlocked()
+        break;
+      case EventActions.WAYPOINT:
+        if(node !== this.pathFinder.end && node !== this.pathFinder.start && !node.isBlocked)
+        this.pathFinder.waypoint(node)
         break;
       default:
         return 

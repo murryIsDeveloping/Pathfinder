@@ -1,11 +1,10 @@
 import { PathNode } from '../path-node';
 
-export function* showPathGenerator(node: PathNode) {
-    const path = node.path();
-    for (let i = 0; i < path.length; i++) {
-      path[i].classes[0] = 'active';
-      yield path[i]
+export function* showPathGenerator(nodePath: PathNode[]) {
+    for (let i = 0; i < nodePath.length; i++) {
+        nodePath[i].classes[0] = 'active';
+      yield nodePath[i]
     }
   
-    return path[path.length-1];
+    return nodePath[nodePath.length-1];
   }

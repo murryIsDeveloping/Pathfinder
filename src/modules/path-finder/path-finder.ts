@@ -6,6 +6,7 @@ export class PathFinder {
     public end: PathNode;
     private width: number;
     private height: number;
+    public waypoints: Point[] = [];
   
     constructor(width: number, height: number) {
       this.height = height;
@@ -84,5 +85,17 @@ export class PathFinder {
       if(!isEnd) {
         this.setEnd(node)
       }
+    }
+
+    public waypoint(node: PathNode) {
+        const {x, y} = node.position;
+        let exists = this.waypoints.find(waypoint => waypoint.x === x && waypoint.y === y)
+        if (exists) {
+            node.classes[1] = ''
+            this.waypoints.filter(waypoint => !(waypoint.x === x && waypoint.y === y))
+        } else {
+            node.classes[1] = 'waypoint'
+            this.waypoints.push({x, y})
+        }
     }
   }

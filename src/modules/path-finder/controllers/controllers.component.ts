@@ -6,6 +6,7 @@ export enum EventActions {
   START,
   END,
   RESET,
+  WAYPOINT
 }
 
 @Component({
@@ -44,6 +45,11 @@ export class ControllersComponent implements OnInit {
   end(){
     this.action.emit(EventActions.END)
     this.actionMessage = 'Select end cell'
+  }
+
+  waypoint(){
+    this.action.emit(EventActions.WAYPOINT)
+    this.actionMessage = 'Select waypoint'
   }
 
 }
