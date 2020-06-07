@@ -93,7 +93,7 @@ export class PathFinder {
         let exists = this.waypoints.find(waypoint => waypoint.x === x && waypoint.y === y)
         if (exists) {
             node.classes[1] = ''
-            this.waypoints.filter(waypoint => !(waypoint.x === x && waypoint.y === y))
+            this.waypoints = this.waypoints.filter(waypoint => !(waypoint.x === x && waypoint.y === y))
         } else {
             node.classes[1] = 'waypoint'
             this.waypoints.push({x, y})
