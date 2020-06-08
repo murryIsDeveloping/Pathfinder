@@ -1,12 +1,15 @@
 <app-algorithms></app-algorithms>
 
-<div class="contollers">
-    <button (click)="run()">Run</button>
-    <button (click)="reset()">Reset</button>
-    <button (click)="start()">Starting Point</button>
-    <button (click)="end()">End Point</button>
-    <button (click)="block()">Create Walls</button>
-    <button (click)="waypoint()">Waypoint</button>
+<div class="actions">
+    <h3>Cell Actions</h3>
+    <button (click)="start()" [ngClass]="{ 'active': PathFindingService.eventAction === 'START' }">Starting Point</button>
+    <button (click)="end()" [ngClass]="{ 'active': PathFindingService.eventAction === 'END' }">End Point</button>
+    <button (click)="block()" [ngClass]="{ 'active': PathFindingService.eventAction === 'BLOCK' }">Create Walls</button>
+    <button (click)="waypoint()" [ngClass]="{ 'active': PathFindingService.eventAction === 'WAYPOINT' }">Waypoint</button>
 </div>
 
-<h3 class="action-message">{{ actionMessage }}</h3>
+<div class="contollers">
+    <h3>Controls</h3>
+    <button (click)="run()">Run</button>
+    <button (click)="reset()">Reset</button>
+</div>

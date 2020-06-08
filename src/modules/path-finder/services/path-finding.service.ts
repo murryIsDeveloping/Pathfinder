@@ -5,10 +5,10 @@ import { Algorithm, Algorithms } from '../algorithum';
 import { PathNode } from '../path-node';
 
 export enum EventActions {
-  BLOCK,
-  START,
-  END,
-  WAYPOINT,
+  BLOCK = "BLOCK",
+  START = "START",
+  END = "END",
+  WAYPOINT = "WAYPOINT",
 }
 
 @Injectable({
@@ -16,7 +16,7 @@ export enum EventActions {
 })
 export class PathFindingService {
   public pathFinder: PathFinder = new PathFinder(30, 20);
-  private eventAction: EventActions = EventActions.START;
+  public eventAction: EventActions = EventActions.START;
   public readonly algorithms: Algorithm[] = Algorithms;
   private algorithm$ = new BehaviorSubject(Algorithms[0]);
 
