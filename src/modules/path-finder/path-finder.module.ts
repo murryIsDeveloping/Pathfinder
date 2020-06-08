@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GridComponent } from './grid/grid.component';
-import { ControllersComponent } from './controllers/controllers.component';
+import { GridComponent } from './components/grid/grid.component';
+import { ControllersComponent } from './components/controllers/controllers.component';
+import { AlgorithmsComponent } from './components/algorithms/algorithms.component';
 
 
 
 @NgModule({
-  declarations: [GridComponent, ControllersComponent],
+  declarations: [GridComponent, ControllersComponent, AlgorithmsComponent],
   imports: [
     CommonModule
   ],

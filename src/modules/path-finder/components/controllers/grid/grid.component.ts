@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { PathNode } from '../path-node';
+import { PathNode } from '../../../path-node';
 import { interval, Subscription } from 'rxjs';
-import { EventActions } from '../controllers/controllers.component';
-import { PathFinder } from '../path-finder';
-import { findPathGenerator } from '../generators/desktra';
-import { showPathGenerator } from '../generators/show-path';
-import { noPathGenerator } from '../generators/no-path';
-import { resetGenerator } from '../generators/reset';
+import { EventActions } from '../controllers.component';
+import { PathFinder } from '../../../path-finder';
+import { findPathGenerator } from '../../../generators/algorithums/desktra';
+import { showPathGenerator } from '../../../generators/show-path';
+import { noPathGenerator } from '../../../generators/no-path';
+import { resetGenerator } from '../../../generators/reset';
 
 @Component({
   selector: 'app-grid',

@@ -10,6 +10,7 @@ export class PathNode {
   private blocked: boolean = false;
   private checked: boolean = false;
   public weighting: number;
+  public gScore: number;
   public parent: PathNode;
   public classes: string[] = ['', '', ''];
 

@@ -1,0 +1,11 @@
+<div>
+    <app-controllers></app-controllers>
+    <div class="grid" [ngClass]="pathfinder.theme">
+        <div class="row" *ngFor="let row of pathfinder.grid">
+            <div class="path" *ngFor="let node of row"
+                 (click)="runAction(node)" [ngClass]="node.classes">
+                <div class="path-inner"></div>
+            </div>
+        </div>
+    </div>
+</div>

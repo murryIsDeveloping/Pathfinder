@@ -14,15 +14,24 @@ export class PathFinder {
       this.width = width;
       this.createGrid();
     }
+
+    private forEveryNode(func: (node: PathNode) => void){
+      this.grid.forEach(row => {
+        row.forEach(node => {
+          func(node)
+        });
+      });
+    }
   
     public reset(){
-      this.grid.map(row => row.forEach(x => {
-        if(!x.isBlocked){
-          x.parent = null
-          x.weighting = null
-          x.uncheck()
+      this.forEveryNode(node => {
+        if(!node.isBlocked){
+          node.gScore = null
+          node.parent = null
+          node.weighting = null
+          node.uncheck()
         }
-      }))
+      })
     }
   
     public getNode(position: Point): PathNode {
@@ -98,5 +107,13 @@ export class PathFinder {
             node.classes[1] = 'waypoint'
             this.waypoints.push({x, y})
         }
+    }
+
+    public setGScore(endpoint: PathNode){
+      this.forEveryNode((pathNode) => {
+        let xScore = Math.abs(endpoint.position.x - pathNode.position.x);
+        let yScore = Math.abs(endpoint.position.y - pathNode.position.y)
+        pathNode.gScore = Math.round(Math.sqrt(xScore**2 + yScore**2))
+      })
     }
   }
