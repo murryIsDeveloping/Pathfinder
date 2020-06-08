@@ -1,6 +1,7 @@
 import { PathNode, Point } from './path-node';
 
 export class PathFinder {
+    public gScoreMultiplier = 3;
     public grid: PathNode[][];
     public start: PathNode;
     public end: PathNode;
@@ -113,7 +114,7 @@ export class PathFinder {
       this.forEveryNode((pathNode) => {
         let xScore = Math.abs(endpoint.position.x - pathNode.position.x);
         let yScore = Math.abs(endpoint.position.y - pathNode.position.y)
-        pathNode.gScore = Math.round(Math.sqrt(xScore**2 + yScore**2))
+        pathNode.gScore = Math.round(Math.sqrt(xScore**2 + yScore**2)) * this.gScoreMultiplier
       })
     }
   }

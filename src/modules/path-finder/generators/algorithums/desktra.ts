@@ -1,4 +1,4 @@
-import { PathNode, Point } from '../../path-node';
+import { PathNode } from '../../path-node';
 import { PathFinder } from '../../path-finder';
 
 export function* findPathGenerator(pathFinder: PathFinder) {

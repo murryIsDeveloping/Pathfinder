@@ -2,7 +2,6 @@ import { PathNode } from '../../path-node';
 import { PathFinder } from '../../path-finder';
 
 export function* aStarGenerator(pathFinder: PathFinder) {
-  let gScoreMultiplier = 2;
   let { start, end } = pathFinder;
   let path: PathNode[] = [];
 
@@ -50,7 +49,7 @@ export function* aStarGenerator(pathFinder: PathFinder) {
         }
 
         if (node && !node.isBlocked && !node.isChecked) {
-          let weight = weighting + currentNode.weighting + (node.gScore * gScoreMultiplier);
+          let weight = weighting + currentNode.weighting + node.gScore;
           if (!node.weighting || weight < node.weighting) {
             node.weighting = weight;
             node.parent = currentNode;
@@ -93,8 +92,9 @@ function nextWaypointFunction(pathFinder: PathFinder) {
     let point = waypoints.shift();
 
     if(point){
-        pathFinder.setGScore(point);
-        return pathFinder.getNode(point)
+      let node = pathFinder.getNode(point);
+      pathFinder.setGScore(node);
+      return node
     } else {
         pathFinder.setGScore(pathFinder.end);
         return null
