@@ -5,10 +5,12 @@ import { Algorithm, Algorithms } from '../algorithum';
 import { PathNode } from '../path-node';
 
 export enum EventActions {
-  BLOCK = "BLOCK",
-  START = "START",
-  END = "END",
-  WAYPOINT = "WAYPOINT",
+  BLOCK = 'BLOCK',
+  START = 'START',
+  END = 'END',
+  WAYPOINT = 'WAYPOINT',
+  INCREASEWEIGHT = 'INCREASEWEIGHT',
+  DECREASEWEIGHT = 'DECREASEWEIGHT',
 }
 
 @Injectable({
@@ -58,27 +60,27 @@ export class PathFindingService {
         }
         break;
       case EventActions.END:
-        console.log('Running')
         if (
           this.notStart(node) &&
           this.notBlocked(node) &&
           this.notWaypoint(node)
         ) {
-          console.log('Ran')
           this.pathFinder.toggleEnd(node);
         }
         break;
       case EventActions.WAYPOINT:
-        if (
-          this.notStart(node) &&
-          this.notEnd(node) &&
-          this.notBlocked(node)
-        ) {
+        if (this.notStart(node) && this.notEnd(node) && this.notBlocked(node)) {
           this.pathFinder.waypoint(node);
         }
         break;
+      case EventActions.INCREASEWEIGHT:
+        node.increaseWeight()
+        break;
+      case EventActions.DECREASEWEIGHT:
+        node.decreaseWeight()
+        break;
       default:
-        return
+        return;
     }
   }
 

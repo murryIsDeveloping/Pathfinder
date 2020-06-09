@@ -21,7 +21,7 @@ export function* findPathGenerator(pathFinder: PathFinder) {
     let hitwaypoint = false;
     for (let a = -1; a <= 1; a++) {
       for (let b = -1; b <= 1; b++) {
-        let weighting = a === 0 || b === 0 ? 10 : 15;
+        let weighting = a === 0 || b === 0 ? 1 : 1.5;
         let node = pathFinder.getNode({
           x: currentNode.position.x + a,
           y: currentNode.position.y + b,
@@ -48,7 +48,7 @@ export function* findPathGenerator(pathFinder: PathFinder) {
         }
 
         if (node && !node.isBlocked && !node.isChecked) {
-          let weight = weighting + currentNode.weighting;
+          let weight = (weighting * node.weightMultipler) + currentNode.weighting;
           if (!node.weighting || weight < node.weighting) {
             node.weighting = weight;
             node.parent = currentNode;

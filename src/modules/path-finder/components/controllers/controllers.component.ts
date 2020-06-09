@@ -41,4 +41,12 @@ export class ControllersComponent implements OnInit {
   waypoint(){
     this.PathFindingService.setAction(EventActions.WAYPOINT)
   }
+
+  increaseWeight(){
+    this.PathFindingService.setAction(EventActions.INCREASEWEIGHT)
+  }
+
+  decreaseWeight(){
+    this.PathFindingService.setAction(EventActions.DECREASEWEIGHT)
+  }
 }

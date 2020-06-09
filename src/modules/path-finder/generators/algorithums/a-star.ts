@@ -49,7 +49,7 @@ export function* aStarGenerator(pathFinder: PathFinder) {
         }
 
         if (node && !node.isBlocked && !node.isChecked) {
-          let weight = weighting + currentNode.weighting + node.gScore;
+          let weight = (weighting * node.weightMultipler) + currentNode.weighting;
           if (!node.weighting || weight < node.weighting) {
             node.weighting = weight;
             node.parent = currentNode;
@@ -66,9 +66,13 @@ export function* aStarGenerator(pathFinder: PathFinder) {
 
     nextNodes.delete(currentNode);
     let nextNode;
-    nextNodes.forEach((x) => {
-      if (!nextNode || x.weighting < nextNode.weighting) {
-        nextNode = x;
+    nextNodes.forEach((node) => {
+      if(nextNode){
+      console.log('node', node.weighting, ' : ', node.gScore, " = ", node.weighting + node.gScore)
+      console.log('nextnode', nextNode.weighting, ' : ', nextNode.gScore, " = ", nextNode.weighting + nextNode.gScore)
+      }
+      if (!nextNode || (node.weighting + node.gScore) < (nextNode.weighting + nextNode.gScore)) {
+        nextNode = node;
       }
     });
 

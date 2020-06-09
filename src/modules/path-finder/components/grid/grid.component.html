@@ -4,7 +4,7 @@
         <div class="row" *ngFor="let row of pathfinder.grid">
             <div class="path" *ngFor="let node of row"
                  (click)="runAction(node)" [ngClass]="node.classes">
-                <div class="path-inner"></div>
+                <div class="path-inner" [ngStyle]="nodeWeightStyle(node)"></div>
             </div>
         </div>
     </div>

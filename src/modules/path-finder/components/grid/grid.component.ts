@@ -21,4 +21,17 @@ export class GridComponent implements OnInit {
   public runAction(node: PathNode) {
     this.PathFindingService.action(node)
   }
+
+  public nodeWeightStyle(node: PathNode){
+    if (node.classes.find(x => x === 'active')){
+      return { backgroundColor: `rgba(255,255,255,0)`} 
+    }
+    if (node.weightMultipler > 5){
+      let val = (node.weightMultipler - 5)/10
+      return { backgroundColor: `rgba(100,100,100, ${val})`}
+    } else if (node.weightMultipler < 5){
+      let val = Math.abs(node.weightMultipler - 5)/10
+      return { backgroundColor: `rgba(255,255,255, ${val})`}
+    }
+  }
 }

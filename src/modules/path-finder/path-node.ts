@@ -6,6 +6,7 @@ export type Point = {
 };
 
 export class PathNode {
+  public weightMultipler: number = 5;
   public position: Point;
   private blocked: boolean = false;
   private checked: boolean = false;
@@ -21,7 +22,7 @@ export class PathNode {
     this.checked = true;
   }
 
-  public uncheck(){
+  public uncheck() {
     this.classes[0] = '';
     this.checked = false;
   }
@@ -32,7 +33,7 @@ export class PathNode {
 
   public toggleBlocked() {
     this.blocked = !this.blocked;
-    this.classes[0] = this.blocked ? 'blocked' : ''
+    this.classes[0] = this.blocked ? 'blocked' : '';
   }
 
   public get isBlocked() {
@@ -45,8 +46,24 @@ export class PathNode {
 
   public path(): PathNode[] {
     if (this.parent) {
-      return this.parent.path().concat(this)
+      return this.parent.path().concat(this);
+    }
+    return [this];
+  }
+
+  public getWeightMultipler(){
+    return this.weightMultipler*10
+  }
+
+  public increaseWeight() {
+    if (this.weightMultipler < 10) {
+      this.weightMultipler++;
     } 
-    return [this]
+  }
+
+  public decreaseWeight() {
+    if (this.weightMultipler > 1) {
+      this.weightMultipler--;
+    } 
   }
 }
