@@ -24,6 +24,7 @@ export class PathNode {
 
   public uncheck() {
     this.classes[0] = '';
+    this.classes[2] = '';
     this.checked = false;
   }
 

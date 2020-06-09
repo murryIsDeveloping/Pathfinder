@@ -23,7 +23,7 @@ export class GridComponent implements OnInit {
   }
 
   public nodeWeightStyle(node: PathNode){
-    if (node.classes[1] !== ''){
+    if (node.classes[1] !== '' || node.classes[2] !== ''){
       return { backgroundColor: `rgba(255,255,255,0)`} 
     }
     if (node.weightMultipler > 5){

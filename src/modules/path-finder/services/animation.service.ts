@@ -4,6 +4,7 @@ import { Algorithm } from '../algorithum';
 import { interval, Subscription } from 'rxjs';
 import { showPathGenerator, noPathGenerator, resetGenerator } from '../generators';
 import { PathNode } from '../path-node';
+import { path } from 'ramda';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class AnimationService {
           this.noPathAnimation(pathFinder)
           return
         }
+        pathFinder.reset()
         const showPath = showPathGenerator(next.value)
         this.pathAnimation(showPath)
       }

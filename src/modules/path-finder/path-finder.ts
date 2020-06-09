@@ -26,6 +26,7 @@ export class PathFinder {
   
     public reset(){
       this.forEveryNode(node => {
+        node.classes[1]
         if(!node.isBlocked){
           node.gScore = null
           node.parent = null
