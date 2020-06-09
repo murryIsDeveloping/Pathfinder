@@ -33,7 +33,7 @@ export class PathNode {
 
   public toggleBlocked() {
     this.blocked = !this.blocked;
-    this.classes[0] = this.blocked ? 'blocked' : '';
+    this.classes[1] = this.blocked ? 'blocked' : '';
   }
 
   public get isBlocked() {
@@ -52,7 +52,8 @@ export class PathNode {
   }
 
   public getWeightMultipler(){
-    return this.weightMultipler*10
+    const scaledWeight = this.weightMultipler - 5;
+    return scaledWeight >= 0 ? scaledWeight*10 : scaledWeight*2
   }
 
   public increaseWeight() {

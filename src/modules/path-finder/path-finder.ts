@@ -1,7 +1,7 @@
 import { PathNode, Point } from './path-node';
 
 export class PathFinder {
-    public gScoreMultiplier = 50;
+    public gScoreMultiplier = 10;
     public grid: PathNode[][];
     public start: PathNode;
     public end: PathNode;
