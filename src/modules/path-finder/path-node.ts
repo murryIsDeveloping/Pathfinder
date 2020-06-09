@@ -8,7 +8,7 @@ export type Point = {
 export class PathNode {
   public weightMultipler: number = 5;
   public position: Point;
-  private blocked: boolean = false;
+  public blocked: boolean = false;
   private checked: boolean = false;
   public weighting: number;
   public gScore: number;

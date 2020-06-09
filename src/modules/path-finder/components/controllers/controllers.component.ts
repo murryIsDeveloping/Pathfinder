@@ -26,6 +26,10 @@ export class ControllersComponent implements OnInit {
     this.AnimationService.resetAnimation(this.PathFindingService.pathFinder)
   }
 
+  clear(){
+    this.PathFindingService.pathFinder.clear()
+  }
+
   block(){
     this.PathFindingService.setAction(EventActions.BLOCK)
   }

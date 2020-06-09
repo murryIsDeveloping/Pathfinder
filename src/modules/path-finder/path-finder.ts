@@ -35,6 +35,20 @@ export class PathFinder {
         }
       })
     }
+
+    public clear(){
+      this.forEveryNode(node => {
+        node.classes = ["","",""]
+        node.blocked = false;
+        node.gScore = null
+        node.parent = null
+        node.weighting = null
+        node.uncheck()
+      });
+      this.waypoints = []
+      this.setStart(this.grid[0][0])
+      this.setEnd(this.grid[this.grid.length-1][this.grid[0].length-1])
+    }
   
     public getNode(position: Point): PathNode {
       return this.grid[position.x] && this.grid[position.x][position.y]
