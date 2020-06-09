@@ -54,7 +54,7 @@ export class PathNode {
 
   public getWeightMultipler(){
     const scaledWeight = this.weightMultipler - 5;
-    return scaledWeight >= 0 ? scaledWeight*10 : scaledWeight*2
+    return scaledWeight >= 0 ? scaledWeight + 1 : 0.5**Math.abs(scaledWeight)
   }
 
   public increaseWeight() {

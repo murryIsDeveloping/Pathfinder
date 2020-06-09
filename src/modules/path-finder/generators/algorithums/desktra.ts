@@ -48,7 +48,7 @@ export function* findPathGenerator(pathFinder: PathFinder) {
         }
 
         if (node && !node.isBlocked && !node.isChecked) {
-          let weight = weighting + node.getWeightMultipler() + currentNode.weighting;
+          let weight = (weighting * node.getWeightMultipler()) + currentNode.weighting;
           if (!node.weighting || weight < node.weighting) {
             node.weighting = weight;
             node.parent = currentNode;
