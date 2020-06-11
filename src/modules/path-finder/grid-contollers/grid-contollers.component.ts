@@ -1,0 +1,47 @@
+import { Component, OnInit } from '@angular/core';
+import { PathFindingService } from '../services/path-finding.service';
+import { AnimationService } from '../services/animation.service';
+
+@Component({
+  selector: 'app-grid-contollers',
+  templateUrl: './grid-contollers.component.html',
+  styleUrls: ['./grid-contollers.component.sass']
+})
+export class GridContollersComponent implements OnInit {
+
+  constructor(
+    public PathFindingService: PathFindingService,
+    private AnimationService: AnimationService
+  ) { }
+
+  ngOnInit(): void {
+  }
+
+  addRow(){
+    if(this.AnimationService.isRunning){
+      return 
+    }
+    this.PathFindingService.pathFinder.addGridRow()
+  }
+
+  removeRow(){
+    if(this.AnimationService.isRunning){
+      return 
+    }
+    this.PathFindingService.pathFinder.removeGridRow()
+  }
+
+  addColumn(){
+    if(this.AnimationService.isRunning){
+      return 
+    }
+    this.PathFindingService.pathFinder.addGridColumn()
+  }
+
+  removeColumn(){
+    if(this.AnimationService.isRunning){
+      return 
+    }
+    this.PathFindingService.pathFinder.removeGridColumn()
+  }
+}
