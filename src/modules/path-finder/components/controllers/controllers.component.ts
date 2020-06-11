@@ -30,28 +30,4 @@ export class ControllersComponent implements OnInit {
     this.AnimationService.resetAnimation(this.PathFindingService.pathFinder)
     this.PathFindingService.pathFinder.clear()
   }
-
-  block(){
-    this.PathFindingService.setAction(EventActions.BLOCK)
-  }
-
-  start(){
-    this.PathFindingService.setAction(EventActions.START)
-  }
-
-  end(){
-    this.PathFindingService.setAction(EventActions.END)
-  }
-
-  waypoint(){
-    this.PathFindingService.setAction(EventActions.WAYPOINT)
-  }
-
-  increaseWeight(){
-    this.PathFindingService.setAction(EventActions.INCREASEWEIGHT)
-  }
-
-  decreaseWeight(){
-    this.PathFindingService.setAction(EventActions.DECREASEWEIGHT)
-  }
 }
