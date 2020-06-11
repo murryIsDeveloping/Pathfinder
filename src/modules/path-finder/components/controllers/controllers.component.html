@@ -1,17 +1,37 @@
 <app-algorithms></app-algorithms>
 
-<div class="actions">
-    <h3>Cell Actions</h3>
-    <button (click)="start()" [ngClass]="{ 'active': PathFindingService.eventAction === 'START' }">Starting Point</button>
-    <button (click)="end()" [ngClass]="{ 'active': PathFindingService.eventAction === 'END' }">End Point</button>
-    <button (click)="block()" [ngClass]="{ 'active': PathFindingService.eventAction === 'BLOCK' }">Create Walls</button>
-    <button (click)="waypoint()" [ngClass]="{ 'active': PathFindingService.eventAction === 'WAYPOINT' }">Waypoint</button>
-    <button (click)="increaseWeight()" [ngClass]="{ 'active': PathFindingService.eventAction === 'INCREASEWEIGHT' }">Increase Point Weight</button>
-    <button (click)="decreaseWeight()" [ngClass]="{ 'active': PathFindingService.eventAction === 'DECREASEWEIGHT' }">Descrease Point Weight</button>
+
+<h3>Grid Controls</h3>
+<div class="grid-controls">
+    <div class="grid-control">
+        <h4>Column</h4>
+        <button (click)="addColumn()">+</button>
+        <button (click)="removeColumn()">-</button>
+    </div>
+    <div class="grid-control">
+        <h4>Row</h4>
+        <button (click)="addRow()">+</button>
+        <button (click)="removeRow()">-</button>
+    </div>
 </div>
 
+
+<h3>Cell Actions</h3>
+<div class="actions">
+    <button (click)="start()" [ngClass]="{ 'active': PathFindingService.eventAction === 'START' }">Starting
+        Point</button>
+    <button (click)="end()" [ngClass]="{ 'active': PathFindingService.eventAction === 'END' }">End Point</button>
+    <button (click)="block()" [ngClass]="{ 'active': PathFindingService.eventAction === 'BLOCK' }">Create Walls</button>
+    <button (click)="waypoint()"
+        [ngClass]="{ 'active': PathFindingService.eventAction === 'WAYPOINT' }">Waypoint</button>
+    <button (click)="increaseWeight()"
+        [ngClass]="{ 'active': PathFindingService.eventAction === 'INCREASEWEIGHT' }">Increase Point Weight</button>
+    <button (click)="decreaseWeight()"
+        [ngClass]="{ 'active': PathFindingService.eventAction === 'DECREASEWEIGHT' }">Descrease Point Weight</button>
+</div>
+
+<h3>Controls</h3>
 <div class="contollers">
-    <h3>Controls</h3>
     <button (click)="run()">Run</button>
     <button (click)="reset()">Reset</button>
     <button (click)="clear()">Clear</button>

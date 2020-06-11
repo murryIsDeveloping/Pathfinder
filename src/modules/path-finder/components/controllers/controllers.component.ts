@@ -27,6 +27,7 @@ export class ControllersComponent implements OnInit {
   }
 
   clear(){
+    this.AnimationService.resetAnimation(this.PathFindingService.pathFinder)
     this.PathFindingService.pathFinder.clear()
   }
 
@@ -52,5 +53,33 @@ export class ControllersComponent implements OnInit {
 
   decreaseWeight(){
     this.PathFindingService.setAction(EventActions.DECREASEWEIGHT)
+  }
+
+  addRow(){
+    if(this.AnimationService.isRunning){
+      return 
+    }
+    this.PathFindingService.pathFinder.addGridRow()
+  }
+
+  removeRow(){
+    if(this.AnimationService.isRunning){
+      return 
+    }
+    this.PathFindingService.pathFinder.removeGridRow()
+  }
+
+  addColumn(){
+    if(this.AnimationService.isRunning){
+      return 
+    }
+    this.PathFindingService.pathFinder.addGridColumn()
+  }
+
+  removeColumn(){
+    if(this.AnimationService.isRunning){
+      return 
+    }
+    this.PathFindingService.pathFinder.removeGridColumn()
   }
 }

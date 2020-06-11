@@ -10,12 +10,14 @@ import { path } from 'ramda';
   providedIn: 'root'
 })
 export class AnimationService {
+  public isRunning = false;
   private animationSubscription: Subscription
   private noPath: boolean;
 
   constructor() { }
 
   public searchAnimation(pathFinder: PathFinder, algorithm: Algorithm){
+    this.isRunning = true;
     this.animationUnsubscribe();
     pathFinder.reset();
     const findPath = algorithm.generator(pathFinder)
@@ -46,6 +48,7 @@ export class AnimationService {
         setTimeout(() => {
           this.resetAnimation(pathFinder)
           this.noPath = false
+          this.isRunning = false
         }, 3000)
       }
     });
@@ -59,6 +62,7 @@ export class AnimationService {
       let next = reset.next()
       if (next.done){
         this.animationSubscription.unsubscribe()
+        this.isRunning = false
       }
     });
   }
@@ -69,6 +73,7 @@ export class AnimationService {
       let next = generator.next()
       if (next.done){
         this.animationSubscription.unsubscribe()
+        this.isRunning = false
       }
     });
   }

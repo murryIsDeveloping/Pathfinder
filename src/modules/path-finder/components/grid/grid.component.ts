@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PathNode } from '../../path-node';
 import { PathFinder } from '../../path-finder';
 import { PathFindingService } from '../../services/path-finding.service';
+import { AnimationService } from '../../services/animation.service';
 
 @Component({
   selector: 'app-grid',
@@ -11,7 +12,8 @@ import { PathFindingService } from '../../services/path-finding.service';
 export class GridComponent implements OnInit {
   public pathfinder: PathFinder;
   constructor(
-    public PathFindingService: PathFindingService
+    public PathFindingService: PathFindingService,
+    private AnimationService: AnimationService
   ) {  
     this.pathfinder = this.PathFindingService.pathFinder
   }
@@ -19,6 +21,9 @@ export class GridComponent implements OnInit {
   ngOnInit(): void { }
 
   public runAction(node: PathNode) {
+    if(this.AnimationService.isRunning){
+      return 
+    }
     this.PathFindingService.action(node)
   }
 
