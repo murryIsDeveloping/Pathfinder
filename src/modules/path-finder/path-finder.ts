@@ -9,8 +9,10 @@ export class PathFinder {
   public waypoints: Point[] = [];
   public theme: string = 'theme-one';
 
-  constructor(width: number, height: number) {
-    this.matrix = new Matrix(width, height);
+  constructor(matrix: Matrix) {
+    this.matrix = matrix;
+    this.setStart(matrix.start);
+    this.setEnd(matrix.end);
   }
 
   private forEveryNode(func: (node: PathNode) => void) {

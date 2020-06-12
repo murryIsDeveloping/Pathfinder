@@ -21,27 +21,27 @@ export class GridContollersComponent implements OnInit {
     if(this.AnimationService.isRunning){
       return 
     }
-    this.PathFindingService.pathFinder.matrix.addGridRow();
+    this.PathFindingService.matrix.addGridRow();
   }
 
   removeRow(){
     if(this.AnimationService.isRunning){
       return 
     }
-    this.PathFindingService.pathFinder.matrix.removeGridRow()
+    this.PathFindingService.matrix.removeGridRow()
   }
 
   addColumn(){
     if(this.AnimationService.isRunning){
       return 
     }
-    this.PathFindingService.pathFinder.matrix.addGridColumn()
+    this.PathFindingService.matrix.addGridColumn()
   }
 
   removeColumn(){
     if(this.AnimationService.isRunning){
       return 
     }
-    this.PathFindingService.pathFinder.matrix.removeGridColumn()
+    this.PathFindingService.matrix.removeGridColumn()
   }
 }

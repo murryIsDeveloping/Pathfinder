@@ -57,7 +57,7 @@ export class Matrix {
   }
 
   public get start(){
-    return this.grid[this.grid.length - 1][this.grid[0].length - 1]
+    return this.grid[0][0]
   }
 
   public get end(){

@@ -3,6 +3,7 @@ import { PathFinder } from '../path-finder';
 import { BehaviorSubject } from 'rxjs';
 import { Algorithm, Algorithms } from '../algorithum';
 import { PathNode } from '../path-node';
+import { Matrix } from '../matrix';
 
 export enum EventActions {
   BLOCK = 'BLOCK',
@@ -17,15 +18,13 @@ export enum EventActions {
   providedIn: 'root',
 })
 export class PathFindingService {
-  public pathFinder: PathFinder = new PathFinder(30, 20);
+  public matrix: Matrix = new Matrix(30, 20)
+  public pathFinder: PathFinder = new PathFinder(this.matrix);
   public eventAction: EventActions = EventActions.START;
   public readonly algorithms: Algorithm[] = Algorithms;
   private algorithm$ = new BehaviorSubject(Algorithms[0]);
 
-  constructor() {
-    this.pathFinder.toggleStart(this.pathFinder.getNode({ x: 0, y: 0 }));
-    this.pathFinder.toggleEnd(this.pathFinder.getNode({ x: 19, y: 29 }));
-  }
+  constructor() { }
 
   public set algorithm(algorithm: Algorithm) {
     this.algorithm$.next(algorithm);
