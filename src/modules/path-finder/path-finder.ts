@@ -1,23 +1,20 @@
 import { PathNode, Point } from './path-node';
+import { Matrix } from './matrix';
 
 export class PathFinder {
   public gScoreMultiplier = 10;
-  public grid: PathNode[][];
+  public matrix: Matrix;
   public start: PathNode;
   public end: PathNode;
-  private width: number;
-  private height: number;
   public waypoints: Point[] = [];
   public theme: string = 'theme-one';
 
   constructor(width: number, height: number) {
-    this.height = height;
-    this.width = width;
-    this.createGrid();
+    this.matrix = new Matrix(width, height);
   }
 
   private forEveryNode(func: (node: PathNode) => void) {
-    this.grid.forEach((row) => {
+    this.matrix.grid.forEach((row) => {
       row.forEach((node) => {
         func(node);
       });
@@ -46,72 +43,23 @@ export class PathFinder {
       node.uncheck();
     });
     this.waypoints = [];
-    this.setStart(this.grid[0][0]);
-    this.setEnd(this.grid[this.grid.length - 1][this.grid[0].length - 1]);
+    this.setStart(this.matrix.start);
+    this.setEnd(this.matrix.end);
   }
 
   public getNode(position: Point): PathNode {
-    return this.grid[position.x] && this.grid[position.x][position.y]
-      ? this.grid[position.x][position.y]
+    return this.matrix.grid[position.x] && this.matrix.grid[position.x][position.y]
+      ? this.matrix.grid[position.x][position.y]
       : null;
-  }
-
-  public createGrid() {
-    this.grid = [];
-    for (let i = 0; i < this.height; i++) {
-      let row = new Array(this.width).fill(0).map((_) => new PathNode());
-      row.forEach((node, index) => node.setPosition(i, index));
-      this.grid.push(row);
-    }
-  }
-
-  public addGridRow() {
-    if (this.height < 100) {
-      this.height++;
-      let row = new Array(this.width).fill(0).map((_) => new PathNode());
-      row.forEach((node, index) => node.setPosition(this.height - 1, index));
-      this.grid.push(row);
-    }
-  }
-
-  public removeGridRow() {
-    if (this.height > 2) {
-      this.height--;
-      this.grid.pop();
-      this.setStartEnd()
-    }
-  }
-
-  public addGridColumn() {
-    if (this.width < 100) {
-      this.width++;
-      this.grid.forEach((row, index) => {
-        let node = new PathNode();
-        node.setPosition(index, this.width - 1);
-        row.push(node);
-      });
-    }
-  }
-
-  public removeGridColumn() {
-    if (this.width > 2) {
-      this.width--;
-      this.grid.forEach((row) => {
-        row.pop();
-      });
-      this.setStartEnd()
-    }
   }
 
   public setStartEnd(){
     if(!this.getNode(this.start.position)){
-      this.setStart(this.grid[0][0]);
+      this.setStart(this.matrix.start);
     }
     if(!this.getNode(this.end.position)){
-      this.setEnd(this.grid[this.grid.length - 1][this.grid[0].length - 1]);
+      this.setEnd(this.matrix.end);
     }
-
-    console.log(this.start, this.end)
   }
 
   private setStart(node: PathNode) {
