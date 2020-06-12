@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PathFindingService } from '../services/path-finding.service';
-import { AnimationService } from '../services/animation.service';
+import { PathFindingService } from '../../services/path-finding.service';
+import { AnimationService } from '../../services/animation.service';
 
 @Component({
   selector: 'app-grid-contollers',
@@ -21,27 +21,27 @@ export class GridContollersComponent implements OnInit {
     if(this.AnimationService.isRunning){
       return 
     }
-    this.PathFindingService.pathFinder.addGridRow()
+    this.PathFindingService.pathFinder.matrix.addGridRow();
   }
 
   removeRow(){
     if(this.AnimationService.isRunning){
       return 
     }
-    this.PathFindingService.pathFinder.removeGridRow()
+    this.PathFindingService.pathFinder.matrix.removeGridRow()
   }
 
   addColumn(){
     if(this.AnimationService.isRunning){
       return 
     }
-    this.PathFindingService.pathFinder.addGridColumn()
+    this.PathFindingService.pathFinder.matrix.addGridColumn()
   }
 
   removeColumn(){
     if(this.AnimationService.isRunning){
       return 
     }
-    this.PathFindingService.pathFinder.removeGridColumn()
+    this.PathFindingService.pathFinder.matrix.removeGridColumn()
   }
 }

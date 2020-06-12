@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PathFindingService, EventActions } from '../services/path-finding.service';
+import { PathFindingService, EventActions } from '../../services/path-finding.service';
 
 @Component({
   selector: 'app-action-controllers',

@@ -14,11 +14,11 @@ export class PathFinder {
   }
 
   private forEveryNode(func: (node: PathNode) => void) {
-    this.matrix.grid.forEach((row) => {
-      row.forEach((node) => {
-        func(node);
-      });
-    });
+    for(let row of this.matrix.grid) {
+      for(let cell of row) {
+        func(cell);
+      };
+    };
   }
 
   public reset() {

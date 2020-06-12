@@ -12,7 +12,7 @@ import { path } from 'ramda';
 export class AnimationService {
   public isRunning = false;
   private animationSubscription: Subscription
-  private noPath: boolean;
+  public noPath: boolean;
 
   constructor() { }
 
