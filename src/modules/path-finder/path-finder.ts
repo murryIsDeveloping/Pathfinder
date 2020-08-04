@@ -37,8 +37,6 @@ export class PathFinder {
       }
     });
 
-    console.log('end', end)
-
     if (!start) {
       this.setStart(this.matrix.start)
     }
