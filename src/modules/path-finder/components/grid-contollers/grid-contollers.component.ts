@@ -29,6 +29,7 @@ export class GridContollersComponent implements OnInit {
       return 
     }
     this.PathFindingService.matrix.removeGridRow()
+    this.PathFindingService.pathFinder.setStartEndIfMissing();
   }
 
   addColumn(){
@@ -43,5 +44,6 @@ export class GridContollersComponent implements OnInit {
       return 
     }
     this.PathFindingService.matrix.removeGridColumn()
+    this.PathFindingService.pathFinder.setStartEndIfMissing();
   }
 }

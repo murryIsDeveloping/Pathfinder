@@ -23,6 +23,31 @@ export class PathFinder {
     };
   }
 
+  public setStartEndIfMissing(){
+    let start = false;
+    let end = false;
+
+    this.forEveryNode(node => {
+      if (node === this.start) {
+        start = true;
+      }
+
+      if(node === this.end) {
+        end = true;
+      }
+    });
+
+    console.log('end', end)
+
+    if (!start) {
+      this.setStart(this.matrix.start)
+    }
+
+    if(!end) {
+      this.setEnd(this.matrix.end);
+    }
+  }
+
   public reset() {
     this.forEveryNode((node) => {
       node.classes[1];
