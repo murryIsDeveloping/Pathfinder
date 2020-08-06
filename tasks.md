@@ -1,0 +1,3 @@
+- Fix Controllers display
+- Graph Searches
+- Pause and Inspect
