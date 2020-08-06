@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PathFinderModule } from 'src/modules/path-finder/path-finder.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { PathFinderModule } from 'src/modules/path-finder/path-finder.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PathFinderModule
+    PathFinderModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
