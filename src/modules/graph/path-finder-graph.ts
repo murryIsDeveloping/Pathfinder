@@ -3,7 +3,7 @@ import { GraphEdge, GraphNode, calcDistance } from './graph';
 export class PathFinderGraph {
     start: GraphNode;
     end: GraphNode;
-    numberOfPoints: number = 100;
+    pointId: number = 0;
     maxDistanceOfEdge: number = 120;
 
     nodes: GraphNode[] = [];
@@ -25,13 +25,18 @@ export class PathFinderGraph {
         const randomNum = (upTo: number) => (Math.round(Math.random() * (upTo - 60))) + 30;
 
         // rounded number of points depending on screen size
-        this.numberOfPoints = Math.round((width / 100 * height / 100) / 10) * 10;
+        let numberOfPoints = Math.round((width / 100 * height / 100) / 10) * 10;
 
-        for (let i = 0; i < this.numberOfPoints; i++) {
-            this.nodes.push(
-                new GraphNode(i, { x: randomNum(width), y: randomNum(height) }),
-            )
+        for (let i = 0; i < numberOfPoints; i++) {
+            this.addNode(randomNum(width), randomNum(height))
         }
+    }
+
+    addNode(x: number, y: number){
+        this.pointId++;
+        this.nodes.push(
+            new GraphNode(this.pointId, {x, y})
+        )
     }
 
     filterEdges(node: GraphNode) {

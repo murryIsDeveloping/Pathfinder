@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class GraphComponent implements OnInit, OnDestroy {
   pathFinderGraph: PathFinderGraph;
-
+  addPointActive = false;
   resizeSubscription: Subscription;
 
   constructor(
@@ -26,12 +26,26 @@ export class GraphComponent implements OnInit, OnDestroy {
     this.resizeSubscriber();
   }
 
-  reset(){
+  reset() {
     this.pathFinderGraph.reset();
   }
 
-  run(){
+  run() {
     this.AnimationService.searchAnimation(this.pathFinderGraph);
+  }
+
+  toggleAddPoint() {
+    this.addPointActive = !this.addPointActive;
+  }
+
+  addPoint(event) {
+    if (this.addPointActive) {
+      this.pathFinderGraph.addNode(event.layerX,event.layerY);
+      this.pathFinderGraph.edges = [];
+      this.pathFinderGraph.nodes.forEach(node => {
+        this.pathFinderGraph.addEdges(node);
+      });
+    }
   }
 
   resizeSubscriber() {
