@@ -1,3 +1,3 @@
 <div class="graph-point" [ngClass]="point.classes" cdkDrag (cdkDragMoved)="moving($event)" cdkDragBoundary=".graph-container" (cdkDragEnded)="onFinished($event)" [cdkDragFreeDragPosition]="dragPosition">
-    {{point.id}}
+<div class="graph-point-inner">{{ point.start ? "Start" : ""}}{{ point.end ? "End" : ""}}</div>
 </div>
