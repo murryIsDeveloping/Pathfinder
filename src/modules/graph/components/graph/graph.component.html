@@ -3,6 +3,6 @@
 <button (click)="toggleAddPoint()" [ngClass]="{ active: addPointActive }">Add Point</button>
 
 <div class="graph-container" (click)="addPoint($event)">
-    <svg id="svg" width="100%" height="100vh"><line *ngFor="let edge of pathFinderGraph.edges" [attr.x1]="edge.pointA.position.x" [attr.x2]="edge.pointB.position.x" [attr.y1]="edge.pointA.position.y" [attr.y2]="edge.pointB.position.y" stroke-width="2" /></svg>
+    <svg id="svg" width="100%" height="100vh"><line *ngFor="let edge of pathFinderGraph.edges" [ngClass]="edge.class" [attr.x1]="edge.pointA.position.x" [attr.x2]="edge.pointB.position.x" [attr.y1]="edge.pointA.position.y" [attr.y2]="edge.pointB.position.y" /></svg>
     <app-graph-point *ngFor="let node of pathFinderGraph.nodes" [point]="node" (onMoved)="onMoved($event)"></app-graph-point>
 </div>

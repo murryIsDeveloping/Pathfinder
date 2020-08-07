@@ -28,7 +28,7 @@ export function* desktraGenerator(pathFinder: PathFinderGraph) {
             if(val.checked) {
                 return
             }
-            
+
             if(!nextNode || val.weighting < nextNode.weighting) {
                 nextNode = val;
             }

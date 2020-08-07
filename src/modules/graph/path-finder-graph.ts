@@ -32,10 +32,10 @@ export class PathFinderGraph {
         }
     }
 
-    addNode(x: number, y: number){
+    addNode(x: number, y: number) {
         this.pointId++;
         this.nodes.push(
-            new GraphNode(this.pointId, {x, y})
+            new GraphNode(this.pointId, { x, y })
         )
     }
 
@@ -69,14 +69,23 @@ export class PathFinderGraph {
         });
     }
 
+    edge(node1: GraphNode, node2: GraphNode): GraphEdge {
+        return this.edges.find(e => {
+            let firstNode = e.pointA === node1 || e.pointB === node1
+            let secondNode = e.pointA === node2 || e.pointB === node2
 
-    reset(){
+            return firstNode && secondNode
+        })
+    }
+
+
+    reset() {
         this.nodes.forEach(node => {
             node.reset();
-            if(node.start) {
+            if (node.start) {
                 node.classes[0] = "start"
             }
-            if(node.end) {
+            if (node.end) {
                 node.classes[0] = "end"
             }
             this.addEdges(node)

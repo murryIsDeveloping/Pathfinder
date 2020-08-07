@@ -25,6 +25,7 @@ export class GraphNode {
 };
 
 export class GraphEdge {
+  class = ""
   distance: number;
 
   constructor(

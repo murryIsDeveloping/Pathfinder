@@ -4,7 +4,15 @@
     position: absolute
 
     line 
+        transition: all ease 0.3s
         stroke: map-get($theme1, "platinum")
+        stroke-width: 3px
+        &.active
+            stroke: map-get($theme1,  "copper-red")
+            stroke-width: 4px
+        &.checked
+            stroke: map-get($theme1,  "tuscany")
+            stroke-width: 2px
 
 .graph-container 
     position: relative

@@ -30,7 +30,7 @@ export class AnimationService {
             pathFinder.reset();
           }, 3000)
         }
-        const showPath = showPathGenerator(pathFinder.end)
+        const showPath = showPathGenerator(pathFinder)
         this.pathAnimation(showPath)
       }
     });
@@ -55,9 +55,9 @@ export class AnimationService {
 
 }
 
-function* showPathGenerator(end: GraphNode) {
-  let nodes = [end];
-  let node = end;
+function* showPathGenerator(pathFinder: PathFinderGraph) {
+  let node = pathFinder.end;
+  let nodes = [node];
   while(node.parent) {
     node = node.parent
     nodes.push(node)
@@ -67,6 +67,10 @@ function* showPathGenerator(end: GraphNode) {
   for (let node of nodes){
     node.active = true;
     node.classes[0] = "active";
+    let edge = pathFinder.edge(node, node.parent)
+    if(edge){
+        edge.class = "active";
+    }
     yield node
   }
 
