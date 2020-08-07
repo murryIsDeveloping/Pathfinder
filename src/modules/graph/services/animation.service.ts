@@ -23,8 +23,12 @@ export class AnimationService {
       if (next.done){
         this.animationSubscription.unsubscribe()
         if (!next.value) {
-          // this.noPathAnimation(pathFinder)
-          return
+          pathFinder.nodes.forEach(node => {
+            node.classes[1] = "no-path"
+          })
+          setTimeout(() => {
+            pathFinder.reset();
+          }, 3000)
         }
         const showPath = showPathGenerator(pathFinder.end)
         this.pathAnimation(showPath)
