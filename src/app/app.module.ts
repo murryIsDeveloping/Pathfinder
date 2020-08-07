@@ -1,3 +1,4 @@
+import { GraphModule } from './../modules/graph/graph.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -14,7 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     PathFinderModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GraphModule
   ],
   providers: [],
   bootstrap: [AppComponent]

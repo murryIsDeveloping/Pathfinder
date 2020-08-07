@@ -1,4 +1,0 @@
-<div class="graph-container">
-    <svg id="svg" width="100%" height="500"><line *ngFor="let edge of edges" [attr.x1]="edge.pointA.position.x" [attr.x2]="edge.pointB.position.x" [attr.y1]="edge.pointA.position.y" [attr.y2]="edge.pointB.position.y" stroke="black"/></svg>
-    <app-graph-point *ngFor="let point of points" [point]="point" (onMoved)="onMoved($event)"></app-graph-point>
-</div>
