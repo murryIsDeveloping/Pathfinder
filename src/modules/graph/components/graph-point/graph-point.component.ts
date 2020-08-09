@@ -15,6 +15,7 @@ export class GraphPointComponent implements OnInit, OnDestroy {
 
   pointEmitter: BehaviorSubject<GraphNode>;
   pointSubscription: Subscription;
+  noLayer:boolean;
 
   dragPosition = {x: 0, y: 0};
   constructor() { }
@@ -28,11 +29,23 @@ export class GraphPointComponent implements OnInit, OnDestroy {
   }
 
   moving(val) {
-    this.point.position = { x: val.event.layerX, y: val.event.layerY}
+
+    if(!val.event.layerX && !val.event.layerX){
+      this.noLayer = true;
+      return;
+    } else {
+      this.noLayer = false;
+    }
+
+    this.point.position = { x: val.event.layerX ||  val.pointerPosition.x , y: val.event.layerY ||  val.pointerPosition.y}
     this.pointEmitter.next(this.point);
   }
 
-  onFinished(_) {
+  onFinished(val) {
+    if(this.noLayer) {
+      this.point.position.x += val.distance.x
+      this.point.position.y += val.distance.y
+    }
     this.onMoved.emit(this.point);
   }
 

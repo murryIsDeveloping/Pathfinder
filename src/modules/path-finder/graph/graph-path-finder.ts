@@ -93,6 +93,7 @@ export class GraphPathFinder implements IPathFinder<GraphPathFinder> {
             // checks to see if node ids are different and edge doesn't already exist in some form
             if (node.id != n.id && !this.edgeExists(node, n)) {
                 if (calcDistance(node, n) <= this.maxDistanceOfEdge) {
+
                     this.edges.push(new GraphEdge(node, n))
                 }
             }

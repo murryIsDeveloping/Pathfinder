@@ -7,7 +7,7 @@ export class GraphNode {
     parent: GraphNode;
     gScore: number = 0;
     classes: string[] = ["", ""];
-  
+
     constructor(
       public id: number,
       public position: {
@@ -15,7 +15,7 @@ export class GraphNode {
         y: number,
       },
     ){}
-  
+
     reset(){
       this.checked = false;
       this.active  = false;
@@ -24,11 +24,11 @@ export class GraphNode {
       this.classes = ["", ""];
     }
   };
-  
+
   export class GraphEdge {
     class = ""
     distance: number;
-  
+
     constructor(
       public pointA: GraphNode,
       public pointB: GraphNode,
@@ -36,11 +36,10 @@ export class GraphNode {
       this.distance = calcDistance(this.pointA, this.pointB)
     }
   }
-  
+
   export function calcDistance(pointA: GraphNode, pointB: GraphNode): number {
     var x = Math.abs(pointA.position.x - pointB.position.x);
     var y = Math.abs(pointA.position.y - pointB.position.y);
     return Math.sqrt(y ** 2 + x ** 2);
   }
-  
-  
+

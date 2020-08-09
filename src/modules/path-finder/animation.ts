@@ -29,7 +29,6 @@ export class PathFinderAnimator<T> {
   }
 
   private noPathAnimation() {
-    console.log('Got to noPathAnimation')
     const noPath = this.pathFinder.noPathGenerator()
     const animationTimer$ = interval(this.pathFinder.noPathTiming);
     this.animationSubscription = animationTimer$.subscribe((_) => {
