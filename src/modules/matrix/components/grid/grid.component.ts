@@ -38,7 +38,10 @@ export class GridComponent implements OnInit, OnDestroy {
         this.pathFinderMatrix.algorithum = algorithm;
         switch (control) {
           case Controls.Play:
-            this.pathFinderAnimator.searchAnimation(10);
+            this.pathFinderAnimator.searchAnimation(10)
+            .then(_ =>
+              this.ControllerService.controls$.next(Controls.Empty)
+            );
             break;
           case Controls.Reset:
             this.pathFinderAnimator.resetAnimation();

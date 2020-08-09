@@ -1,20 +1,20 @@
 <div class="controllers">
   <ng-container *ngFor="let action of actions">
-    <div
-      matRipple
-      class="toggle"
-      [ngClass]="{ active: actionActive.title === action.title }"
-      *ngIf="action.type === 'Toggle'"
-      (click)="setAction(action)"
-    >
-      {{ action.title }}
+    <div class="toggle" *ngIf="action.type === 'Toggle'">
+      <button
+        mat-button
+        [ngClass]="{ active: actionActive.title === action.title }"
+        (click)="setAction(action)"
+      >
+        {{ action.title }}
+      </button>
+      <span class="action-message">{{ action.message }}</span>
     </div>
     <div class="toggle-counter" *ngIf="action.type === 'Toggle Counter'">
       <span>{{ action.title }}</span>
       <div class="counter-wrapper">
-        <div
-          matRipple
-          class="toggle"
+        <button
+          mat-icon-button
           [ngClass]="{
             active:
               actionActive.title === action.title &&
@@ -23,10 +23,9 @@
           (click)="setAction(action, 1)"
         >
           <mat-icon>add</mat-icon>
-        </div>
-        <div
-          matRipple
-          class="toggle"
+        </button>
+        <button
+          mat-icon-button
           [ngClass]="{
             active:
               actionActive.title === action.title &&
@@ -35,19 +34,21 @@
           (click)="setAction(action, -1)"
         >
           <mat-icon>remove</mat-icon>
-        </div>
+        </button>
       </div>
+      <span class="action-message">{{ action.message }}</span>
     </div>
     <div class="toggle-counter" *ngIf="action.type === 'Counter'">
       <span>{{ action.title }}</span>
       <div class="counter-wrapper">
-        <div matRipple class="toggle" (click)="setCounter(action, 1)">
+        <button mat-icon-button (click)="setCounter(action, 1)">
           <mat-icon>add</mat-icon>
-        </div>
-        <div matRipple class="toggle" (click)="setCounter(action, -1)">
+        </button>
+        <button mat-icon-button (click)="setCounter(action, -1)">
           <mat-icon>remove</mat-icon>
-        </div>
+        </button>
       </div>
+      <span class="action-message">{{ action.message }}</span>
     </div>
   </ng-container>
 </div>

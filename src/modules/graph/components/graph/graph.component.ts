@@ -61,7 +61,10 @@ export class GraphComponent implements OnInit, OnDestroy {
         this.pathFinderGraph.algorithum = algorithm;
         switch (control) {
           case Controls.Play:
-            this.pathFinderAnimator.searchAnimation(100);
+            this.pathFinderAnimator.searchAnimation(100)
+            .then(_ =>
+              this.ControllerService.controls$.next(Controls.Empty)
+            );
             break;
           case Controls.Reset:
             this.pathFinderAnimator.resetAnimation();

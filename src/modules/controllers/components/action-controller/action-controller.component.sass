@@ -1,26 +1,21 @@
 @import "variables"
 
 .toggle, .toggle-counter
-  cursor: pointer
-  color: map-get($theme1, "copper-penny")
-  font-weight: bold
+  position: relative
   margin-right: 10px
   margin-bottom: 10px
+  display: flex
+  flex-direction: column
+  align-items: center
 
-
-.toggle
-  background-color: map-get($theme1, "champangne-pink")
-  border: solid 2px  map-get($theme1, "copper-penny")
-  border-radius: 5px
-  padding: 10px 14px
-  display: inline-block
-
-  &.active
-    background-color: map-get($theme1, "copper-penny")
-    color: map-get($theme1, "champangne-pink")
-    border-color: rgba(0,0,0,0)
+.action-message
+  position: absolute
+  font-size: 8px
+  color: map-get($theme1, "copper-penny")
+  bottom: -17px
 
 .toggle-counter
+  height: 60px
   display: flex
   flex-wrap: nowrap
   flex-direction: column

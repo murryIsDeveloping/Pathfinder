@@ -3,7 +3,7 @@ import { Algorithm, SearchType } from '@path-finder/types';
 import { Injectable, OnDestroy } from '@angular/core';
 import { map, withLatestFrom, mergeMap } from 'rxjs/operators';
 
-export enum Controls { Play = "Play", Reset = "Reset", Clear = "Clear" }
+export enum Controls { Play = "Play", Reset = "Reset", Clear = "Clear", Empty = "Empty" }
 export enum GraphActions { AddPoint = "Add Point", RemovePoint = "Remove Point" }
 export enum MatrixActions { Start = "Start", End = "End", Wall = "Wall", Waypoint = "Waypoint", PointWeight = "PointWeight" }
 export enum GridActions { Column}
@@ -13,7 +13,8 @@ export class Action {
 
   constructor(
     public title: string,
-    public type: 'Toggle' | 'Toggle Counter' | 'Counter'
+    public type: 'Toggle' | 'Toggle Counter' | 'Counter',
+    public message: string = null
   ) {
     this.subscription = new BehaviorSubject({ title: this.title, value: 0 });
   }
@@ -25,16 +26,16 @@ export class Action {
     })
   }
 
-  static Toggle(title: string) {
-    return new this(title, 'Toggle');
+  static Toggle(title: string, message:string = null) {
+    return new this(title, 'Toggle', message);
   }
 
-  static ToggleCounter(title: string) {
-    return new this(title, 'Toggle Counter');
+  static ToggleCounter(title: string, message:string = null) {
+    return new this(title, 'Toggle Counter', message);
   }
 
-  static Counter(title: string) {
-    return new this(title, 'Counter');
+  static Counter(title: string,message:string = null) {
+    return new this(title, 'Counter', message);
   }
 }
 
@@ -52,7 +53,7 @@ export class ControllerService implements OnDestroy {
 
   private graphActions: Action[] = [
     Action.Toggle('Move'),
-    Action.Toggle('Add'),
+    Action.Toggle('Add', "max 250"),
     Action.Toggle('Remove'),
   ];
 
@@ -62,8 +63,8 @@ export class ControllerService implements OnDestroy {
     Action.Toggle('Wall'),
     Action.Toggle('Waypoint'),
     Action.ToggleCounter('Weight'),
-    Action.Counter('Rows'),
-    Action.Counter('Columns'),
+    Action.Counter('Rows', 'max 100'),
+    Action.Counter('Columns', 'max 100'),
   ];
 
   public actions$: BehaviorSubject<Action[]> = new BehaviorSubject(this.matrixActions);

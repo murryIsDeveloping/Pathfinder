@@ -8,23 +8,25 @@ export class PathFinderAnimator<T> {
 
   constructor(public pathFinder: IPathFinder<T>) { }
 
-  public searchAnimation(searchTiming: number) {
-    this.isRunning = true;
-    this.animationUnsubscribe();
-    this.pathFinder.reset();
-    const findPath = this.pathFinder.algorithumGenerator();
-    const animationTimer$ = interval(searchTiming);
-    this.animationSubscription = animationTimer$.subscribe((_) => {
-      let next = findPath.next()
-      if (next.done) {
-        this.animationSubscription.unsubscribe()
-        if (!next.value) {
-          this.noPathAnimation()
-          return
+  public searchAnimation(searchTiming: number) :Promise<boolean>{
+    return new Promise((resolve) => {
+      this.isRunning = true;
+      this.animationUnsubscribe();
+      this.pathFinder.reset();
+      const findPath = this.pathFinder.algorithumGenerator();
+      const animationTimer$ = interval(searchTiming);
+      this.animationSubscription = animationTimer$.subscribe((_) => {
+        let next = findPath.next()
+        if (next.done) {
+          resolve(true);
+          this.animationSubscription.unsubscribe()
+          if (!next.value) {
+            this.noPathAnimation()
+          }
+          const showPath = this.pathFinder.showPathGenerator()
+          this.pathAnimation(showPath)
         }
-        const showPath = this.pathFinder.showPathGenerator()
-        this.pathAnimation(showPath)
-      }
+      });
     });
   }
 

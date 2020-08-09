@@ -15,7 +15,7 @@ export class ControlsComponent implements OnInit {
   searchType: SearchType = SearchType.MATRIX;
   algorithm: Algorithm = Algorithm.DIJKSTRA;
 
-  optionsActive = false;
+  optionsActive = true;
 
   constructor(
     public ControllerService: ControllerService

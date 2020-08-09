@@ -46,6 +46,7 @@ export class GraphPathFinder implements IPathFinder<GraphPathFinder> {
 
         // rounded number of points depending on screen size
         let numberOfPoints = Math.round((width / 100 * height / 100) / 10) * 10;
+        numberOfPoints =  numberOfPoints > 250 ? 250 : numberOfPoints;
 
         for (let i = 0; i < numberOfPoints; i++) {
             this.addNode(randomNum(width), randomNum(height))
@@ -53,11 +54,13 @@ export class GraphPathFinder implements IPathFinder<GraphPathFinder> {
     }
 
     addNode(x: number, y: number) {
+        if(this.nodes.length < 250) {
         this.pointId++;
         this.nodes.push(
             new GraphNode(this.pointId, { x, y })
         )
         this.allEdges();
+        }
     }
 
     removeNode(id){
