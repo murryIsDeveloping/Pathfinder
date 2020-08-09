@@ -1,0 +1,48 @@
+@import "variables"
+
+.spacer
+  flex: 1 1 auto
+
+.title
+  display: flex
+  align-items: center
+  margin: 10px 30px
+  font-size: 20px
+  font-weight: bold
+  color: map-get($theme1, "copper-penny")
+
+  .mat-icon
+    margin-left: 5px
+    font-size: 30px
+    height: 30px
+    width: 30px
+
+button
+  margin: 5px
+  height: 40px
+
+.toolbar
+  display: flex
+  position: relative
+  align-items: center
+  justify-content: space-around
+  flex-wrap: wrap
+  background-color: map-get($theme1, "platinum")
+  padding: 0 20px
+  z-index: 1000
+  border-bottom: solid 1px map-get($theme1, "copper-penny")
+
+  &__controller
+    margin: 10px
+
+.actions
+  transition: top ease 0.3s
+  z-index: 999
+  position: relative
+  width: 100vw
+  top: -250px
+  right: 0
+  left: 0
+  &.active
+    top: 0px
+

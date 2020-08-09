@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/sass/theme.scss",
               "src/sass/styles.sass"
             ],
             "scripts": [],
@@ -97,6 +98,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/sass/styles.sass"
             ],
             "stylePreprocessorOptions": {
@@ -133,6 +135,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "pathfinder"
 }

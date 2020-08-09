@@ -1,0 +1,25 @@
+@import "variables"
+
+#svg
+    position: absolute
+    height: 100vh
+
+    line
+        transition: all ease 0.3s
+        stroke: map-get($theme1, "platinum")
+        stroke-width: 3px
+
+        &.checked
+            stroke: map-get($theme1,  "tuscany")
+            stroke-width: 2px
+
+        &.active
+            z-index: 900
+            stroke: map-get($theme1,  "copper-red")
+            stroke-width: 4px
+
+.graph-container
+    margin-top: 80px
+    position: relative
+    width: 100vw
+    height: calc(100vh - 200px)

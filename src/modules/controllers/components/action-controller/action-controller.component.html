@@ -1,0 +1,53 @@
+<div class="controllers">
+  <ng-container *ngFor="let action of actions">
+    <div
+      matRipple
+      class="toggle"
+      [ngClass]="{ active: actionActive.title === action.title }"
+      *ngIf="action.type === 'Toggle'"
+      (click)="setAction(action)"
+    >
+      {{ action.title }}
+    </div>
+    <div class="toggle-counter" *ngIf="action.type === 'Toggle Counter'">
+      <span>{{ action.title }}</span>
+      <div class="counter-wrapper">
+        <div
+          matRipple
+          class="toggle"
+          [ngClass]="{
+            active:
+              actionActive.title === action.title &&
+              (action.subscription | async)?.value == 1
+          }"
+          (click)="setAction(action, 1)"
+        >
+          <mat-icon>add</mat-icon>
+        </div>
+        <div
+          matRipple
+          class="toggle"
+          [ngClass]="{
+            active:
+              actionActive.title === action.title &&
+              (action.subscription | async)?.value == -1
+          }"
+          (click)="setAction(action, -1)"
+        >
+          <mat-icon>remove</mat-icon>
+        </div>
+      </div>
+    </div>
+    <div class="toggle-counter" *ngIf="action.type === 'Counter'">
+      <span>{{ action.title }}</span>
+      <div class="counter-wrapper">
+        <div matRipple class="toggle" (click)="setCounter(action, 1)">
+          <mat-icon>add</mat-icon>
+        </div>
+        <div matRipple class="toggle" (click)="setCounter(action, -1)">
+          <mat-icon>remove</mat-icon>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

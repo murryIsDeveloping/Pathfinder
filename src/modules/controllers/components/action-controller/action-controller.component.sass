@@ -1,0 +1,64 @@
+@import "variables"
+@import "mixins"
+
+
+.toggle, .toggle-counter
+  cursor: pointer
+  color: map-get($theme1, "copper-penny")
+  font-weight: bold
+  margin-right: 10px
+  margin-bottom: 10px
+
+
+.toggle
+  background-color: map-get($theme1, "champangne-pink")
+  border: solid 2px  map-get($theme1, "copper-penny")
+  border-radius: 5px
+  padding: 10px 14px
+  display: inline-block
+
+  &.active
+    background-color: map-get($theme1, "copper-penny")
+    color: map-get($theme1, "champangne-pink")
+    border-color: rgba(0,0,0,0)
+
+.toggle-counter
+  display: flex
+  flex-wrap: nowrap
+  flex-direction: column
+
+  &>span
+    text-align: center
+    font-weight: bold
+    color: map-get($theme1, "copper-penny")
+
+  .toggle
+    margin: 0
+    padding: 7px
+    font-size: 25px
+
+
+    &:first-child
+      border-radius: 5px 0 0 5px
+    &:last-child
+      border-radius: 0 5px 5px 0
+      margin-left: -2px
+
+.counter-wrapper
+  display: flex
+  flex-wrap: nowrap
+
+.controllers
+  width: 100%
+  transition: all ease 0.4s
+  z-index: 999
+  background-color: map-get($theme1, "platinum")
+  position: absolute
+  display: flex
+  align-items: flex-end
+  justify-content: center
+  padding: 10px
+  flex-wrap: wrap
+  box-sizing: border-box
+
+

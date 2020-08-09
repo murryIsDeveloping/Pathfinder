@@ -1,6 +1,0 @@
-<div class="algorithms">
-    <h3>Search Algorithm</h3>
-    <ng-container *ngFor="let algo of algorithms; let i = index" >
-        <button (click)="setAlgorithm(algo)" [ngClass]="{ 'active' : algo === PathFindingService.algorithm }">{{ algo.name }}</button>
-    </ng-container>
-</div>

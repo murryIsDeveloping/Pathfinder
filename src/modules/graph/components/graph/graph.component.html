@@ -1,0 +1,4 @@
+<div class="graph-container" (click)="addPoint($event)">
+    <svg id="svg" width="100%"><line *ngFor="let edge of pathFinderGraph.edges" [ngClass]="edge.class" [attr.x1]="edge.pointA.position.x" [attr.x2]="edge.pointB.position.x" [attr.y1]="edge.pointA.position.y" [attr.y2]="edge.pointB.position.y" /></svg>
+    <app-graph-point *ngFor="let node of pathFinderGraph.nodes" [point]="node" (onMoved)="onMoved($event)" (click)="removePoint(node)" [disableDrag]="(ControllerService.action$ | async )?.title != 'Move'"></app-graph-point>
+</div>

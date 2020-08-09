@@ -1,0 +1,10 @@
+<div>
+    <div class="grid" [ngClass]="pathFinderMatrix.theme">
+        <div class="row" *ngFor="let row of pathFinderMatrix.matrix.grid">
+          <div class="path" *ngFor="let node of row" (click)="nodeClicker$.next(node)"
+          [ngClass]="node.classes">
+                <div class="path-inner" [ngStyle]="nodeWeightStyle(node)"></div>
+            </div>
+        </div>
+    </div>
+</div>
