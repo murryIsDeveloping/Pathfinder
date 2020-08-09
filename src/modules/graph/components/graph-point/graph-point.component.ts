@@ -1,5 +1,5 @@
+import { GraphNode } from '@path-finder/graph/graph';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { GraphNode } from './../../graph';
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { throttleTime } from 'rxjs/operators';
 
@@ -11,6 +11,7 @@ import { throttleTime } from 'rxjs/operators';
 export class GraphPointComponent implements OnInit, OnDestroy {
   @Output() onMoved = new EventEmitter<GraphNode>();
   @Input() point : GraphNode;
+  @Input() disableDrag : boolean;
 
   pointEmitter: BehaviorSubject<GraphNode>;
   pointSubscription: Subscription;

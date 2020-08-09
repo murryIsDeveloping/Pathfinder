@@ -6,6 +6,10 @@
 */
 {
   "files": [],
+  "paths": {
+    "@path-finder/*": ["./src/modules/path-finder/*"],
+  },
+  "baseUrl": "./",
   "references": [
     {
       "path": "./tsconfig.app.json"

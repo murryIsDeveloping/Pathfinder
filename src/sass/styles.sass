@@ -3,21 +3,16 @@
 
 h1,h2,h3,h4
     text-align: center
-
-body, button
     font-family: 'Pacifico', cursive
 
-button 
+body
+  margin: 0
+  overflow-x: hidden
+
+button, .mat-button, .mat-icon-button
     background-color: map-get($theme1, "champangne-pink")
     color: map-get($theme1, "copper-penny")
-    border: 2px solid map-get($theme1, "copper-penny")
-    margin: 6px
-    font-weight: bold
-    border-radius: 6px
-    padding: 10px 20px
-    outline: none
-    box-shadow: none
-    
+
     &.active
         background-color: map-get($theme1, "copper-penny")
-        color: map-get($theme1, "champangne-pink") 
+        color: map-get($theme1, "champangne-pink")

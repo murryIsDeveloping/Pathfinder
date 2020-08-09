@@ -1,5 +1,8 @@
-<h1>Path Finder</h1>
+<app-controls></app-controls>
+<app-graph
+  *ngIf="(ControllerService.searchType$ | async) == 'Graph'"
+></app-graph>
 
-<app-grid></app-grid>
-<app-graph></app-graph>
-<router-outlet></router-outlet>
+<app-grid
+  *ngIf="(ControllerService.searchType$ | async) == 'Matrix'"
+></app-grid>

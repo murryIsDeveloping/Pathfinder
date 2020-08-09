@@ -1,0 +1,50 @@
+<div class="toolbar">
+  <span class="title">Path Finder <mat-icon>swap_calls</mat-icon></span>
+  <div class="toolbar__controller">
+    <ng-container *ngFor="let type of searchTypes; let i = index">
+      <button
+        mat-button
+        (click)="setSearchType(type)"
+        [ngClass]="{ active: type === (ControllerService.searchType$ | async) }"
+      >
+        {{ type }}
+      </button>
+    </ng-container>
+  </div>
+  <div class="toolbar__controller">
+    <ng-container *ngFor="let algo of algorithms; let i = index">
+      <button
+        mat-button
+        (click)="setAlgorithm(algo)"
+        [ngClass]="{ active: algo === (ControllerService.alorithm$ | async) }"
+      >
+        {{ algo }}
+      </button>
+    </ng-container>
+  </div>
+  <div class="toolbar__controller">
+    <button
+      mat-icon-button
+      aria-label="Play"
+      [ngClass]="{ active: (ControllerService.controls$ | async) == 'Play'}"
+      (click)="play()"
+    >
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Reset" (click)="reset()">
+      <mat-icon>replay</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="New" (click)="clear()">
+      <mat-icon>autorenew</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Settings" [ngClass]="{ active: optionsActive }" (click)="toggleOptions()">
+      <mat-icon>settings</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="actions" [ngClass]="{active: optionsActive}">
+  <app-action-controller></app-action-controller>
+</div>
+
+
