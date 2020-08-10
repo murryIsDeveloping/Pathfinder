@@ -1,7 +1,7 @@
 import { BehaviorSubject, Subject, Observable, Subscription, merge } from 'rxjs';
 import { Algorithm, SearchType } from '@path-finder/types';
 import { Injectable, OnDestroy } from '@angular/core';
-import { map, withLatestFrom, mergeMap } from 'rxjs/operators';
+import { map, withLatestFrom, mergeMap, skipWhile } from 'rxjs/operators';
 
 export enum Controls { Play = "Play", Reset = "Reset", Clear = "Clear", Empty = "Empty" }
 export enum GraphActions { AddPoint = "Add Point", RemovePoint = "Remove Point" }
@@ -46,7 +46,7 @@ export class ControllerService implements OnDestroy {
   private subscriptions: Subscription[] = [];
   public alorithm$: BehaviorSubject<Algorithm> = new BehaviorSubject(Algorithm.DIJKSTRA);
   public searchType$: BehaviorSubject<SearchType> = new BehaviorSubject(SearchType.MATRIX);
-  public controls$: Subject<Controls> = new Subject();
+  public controls$: BehaviorSubject<Controls> = new BehaviorSubject(Controls.Empty);
   public contollers$: Observable<{ algorithm: Algorithm, control: Controls }> = this.controls$.pipe(
     map((control) => ({ control, algorithm: this.alorithm$.value }))
   )
@@ -95,6 +95,16 @@ export class ControllerService implements OnDestroy {
         this.actions$.next(this.matrixActions);
       }
     }));
+  }
+
+  controllerAction(actionTitle: string, action: Function, value: { title: String; value: number;} = null){
+    if(this.controls$.value === Controls.Play){
+      return;
+    }
+
+    if ((value ? value.title : this.action$.value.title) === actionTitle) {
+      action()
+    }
   }
 
   ngOnDestroy(){

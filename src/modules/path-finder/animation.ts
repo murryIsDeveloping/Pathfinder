@@ -1,5 +1,6 @@
 import { IPathFinder } from './types';
 import { interval, Subscription } from 'rxjs';
+import { takeUntil, takeWhile } from 'rxjs/operators';
 
 export class PathFinderAnimator<T> {
   public isRunning = false;
@@ -18,13 +19,12 @@ export class PathFinderAnimator<T> {
       this.animationSubscription = animationTimer$.subscribe((_) => {
         let next = findPath.next()
         if (next.done) {
-          resolve(true);
           this.animationSubscription.unsubscribe()
           if (!next.value) {
             this.noPathAnimation()
           }
           const showPath = this.pathFinder.showPathGenerator()
-          this.pathAnimation(showPath)
+          this.pathAnimation(showPath).then(val => resolve(val))
         }
       });
     });
@@ -32,18 +32,16 @@ export class PathFinderAnimator<T> {
 
   private noPathAnimation() {
     const noPath = this.pathFinder.noPathGenerator()
-    const animationTimer$ = interval(this.pathFinder.noPathTiming);
-    this.animationSubscription = animationTimer$.subscribe((_) => {
-      let next = noPath.next()
-      if (next.done) {
-        this.animationSubscription.unsubscribe()
-        this.noPath = true;
-        setTimeout(() => {
-          this.resetAnimation()
-          this.noPath = false
-          this.isRunning = false
-        }, 3000)
-      }
+    const animationTimer$ = interval(this.pathFinder.noPathTiming).pipe(
+      takeWhile(_ => !noPath.next().done)
+    );
+    this.animationSubscription = animationTimer$.subscribe(null, null, () => {
+      this.animationSubscription.unsubscribe()
+      setTimeout(() => {
+        this.resetAnimation()
+        this.noPath = false
+        this.isRunning = false
+      }, 3000)
     });
   }
 
@@ -60,15 +58,18 @@ export class PathFinderAnimator<T> {
     });
   }
 
-  public pathAnimation(generator: Generator) {
+  public pathAnimation(generator: Generator): Promise<boolean> {
+    return new Promise((resolve) => {
     const animationTimer$ = interval(this.pathFinder.showPathTiming);
     this.animationSubscription = animationTimer$.subscribe((_) => {
       let next = generator.next()
       if (next.done) {
         this.animationSubscription.unsubscribe()
         this.isRunning = false
+        resolve(true)
       }
     });
+  })
   }
 
   private animationUnsubscribe() {

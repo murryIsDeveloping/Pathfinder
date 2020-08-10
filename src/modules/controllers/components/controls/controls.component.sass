@@ -11,6 +11,10 @@
   font-weight: bold
   color: map-get($theme1, "copper-penny")
 
+  @media (max-width: 612px)
+    width: 100%
+    justify-content: center
+
   .mat-icon
     margin-left: 5px
     font-size: 30px
@@ -34,6 +38,11 @@ button
 
   &__controller
     margin: 10px
+
+    @media (max-width: 830px)
+      margin: 0px 10px
+
+
 
 .actions
   transition: top ease 0.3s

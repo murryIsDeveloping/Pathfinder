@@ -2,6 +2,8 @@ import { Matrix, PathNode, Point } from './matrix';
 import { IPathFinder, Algorithm } from './../types';
 import { showPathGenerator, noPathGenerator, resetGenerator, desktraGenerator, aStarGenerator } from './generators';
 
+export type Theme = 'theme-one'| 'theme-two'| 'theme-three';
+
 export class MatrixPathFinder implements IPathFinder<MatrixPathFinder> {
   // IPathFinder
   public algorithum = Algorithm.DIJKSTRA;
@@ -15,7 +17,7 @@ export class MatrixPathFinder implements IPathFinder<MatrixPathFinder> {
   public start: PathNode;
   public end: PathNode;
   public waypoints: Point[] = [];
-  public theme: string = 'theme-one';
+  public theme: Theme = 'theme-one';
   public path: PathNode[] = [];
 
   constructor() {
@@ -56,6 +58,7 @@ export class MatrixPathFinder implements IPathFinder<MatrixPathFinder> {
   }
 
   public reset() {
+    this.theme = 'theme-one'
     this.forEveryNode((node) => {
       node.classes[1];
       if (!node.isBlocked) {
@@ -68,6 +71,7 @@ export class MatrixPathFinder implements IPathFinder<MatrixPathFinder> {
   }
 
   public clear() {
+    this.theme = 'theme-one'
     this.forEveryNode((node) => {
       node.classes = ['', '', ''];
       node.blocked = false;

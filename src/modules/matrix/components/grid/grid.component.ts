@@ -59,14 +59,13 @@ export class GridComponent implements OnInit, OnDestroy {
     this.subscriptions.set(
       'counter',
       this.ControllerService.actionCounters$.subscribe((action) => {
-        switch (action.title) {
-          case 'Rows':
-            this.pathFinderMatrix.gridRow(action.value);
-            break;
-          case 'Columns':
-            this.pathFinderMatrix.gridColumn(action.value);
-            break;
-        }
+        this.ControllerService.controllerAction("Rows", () => {
+          this.pathFinderMatrix.gridRow(action.value);
+        }, action)
+
+        this.ControllerService.controllerAction("Columns", () => {
+          this.pathFinderMatrix.gridColumn(action.value);
+        }, action)
       })
     );
   }
@@ -77,49 +76,51 @@ export class GridComponent implements OnInit, OnDestroy {
     this.subscriptions.set(
       'nodeClicker',
       this.nodeClicker$.subscribe((node) => {
-        let action = this.ControllerService.action$.value;
-        switch (action.title) {
-          case 'Start':
-            if (
-              this.notEnd(node) &&
-              this.notBlocked(node) &&
-              this.notWaypoint(node)
-            ) {
-              this.pathFinderMatrix.toggleStart(node);
-            }
-            break;
-          case 'End':
-            if (
-              this.notStart(node) &&
-              this.notBlocked(node) &&
-              this.notWaypoint(node)
-            ) {
-              this.pathFinderMatrix.toggleEnd(node);
-            }
-            break;
-          case 'Wall':
-            if (
-              this.notStart(node) &&
-              this.notEnd(node) &&
-              this.notWaypoint(node)
-            ) {
-              node.toggleBlocked();
-            }
-            break;
-          case 'Waypoint':
-            if (this.notStart(node) && this.notEnd(node) && this.notBlocked(node)) {
-              this.pathFinderMatrix.waypoint(node);
-            }
-            break;
-          case 'Weight':
-            if(action.subscription.value.value == 1) {
-              node.increaseWeight()
-            }
-            if(action.subscription.value.value == -1) {
-              node.decreaseWeight()
-            }
-            break;
-        }
+        let action = this.ControllerService.action$.value
+        this.ControllerService.controllerAction("Start", () => {
+          if (
+            this.notEnd(node) &&
+            this.notBlocked(node) &&
+            this.notWaypoint(node)
+          ) {
+            this.pathFinderMatrix.toggleStart(node);
+          }
+        });
+
+        this.ControllerService.controllerAction("End", () => {
+          if (
+            this.notStart(node) &&
+            this.notBlocked(node) &&
+            this.notWaypoint(node)
+          ) {
+            this.pathFinderMatrix.toggleEnd(node);
+          }
+        });
+
+        this.ControllerService.controllerAction("Wall", () => {
+          if (
+            this.notStart(node) &&
+            this.notEnd(node) &&
+            this.notWaypoint(node)
+          ) {
+            node.toggleBlocked();
+          }
+        });
+
+        this.ControllerService.controllerAction("Waypoint", () => {
+          if (this.notStart(node) && this.notEnd(node) && this.notBlocked(node)) {
+            this.pathFinderMatrix.waypoint(node);
+          }
+        });
+
+        this.ControllerService.controllerAction("Weight", () => {
+          if(action.subscription.value.value == 1) {
+            node.increaseWeight()
+          }
+          if(action.subscription.value.value == -1) {
+            node.decreaseWeight()
+          }
+        });
       })
     );
   }

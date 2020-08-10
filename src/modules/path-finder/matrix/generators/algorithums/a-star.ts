@@ -1,5 +1,5 @@
 import { PathNode } from './../../matrix';
-import { MatrixPathFinder } from "../../matrix-path-finder";
+import { MatrixPathFinder, Theme } from "../../matrix-path-finder";
 
 export function* aStarGenerator(pathFinder: MatrixPathFinder) {
   let { start, end } = pathFinder;
@@ -86,7 +86,7 @@ export function* aStarGenerator(pathFinder: MatrixPathFinder) {
 }
 
 function nextWaypointFunction(pathFinder: MatrixPathFinder) {
-  const themes = ['theme-one', 'theme-two', 'theme-three']
+  const themes : Theme[] = ['theme-one', 'theme-two', 'theme-three']
   const waypoints = JSON.parse(JSON.stringify(pathFinder.waypoints));
   return () => {
     pathFinder.theme = themes[waypoints.length % 3]

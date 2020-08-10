@@ -9,6 +9,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WindowService } from './../../../shared/window.service';
 import { Subscription, Subject } from 'rxjs';
 
+const heightOffset = 250;
+
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
@@ -29,7 +31,7 @@ export class GraphComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.pathFinderGraph = new GraphPathFinder(
-      window.innerHeight - 250,
+      window.innerHeight - heightOffset,
       window.innerWidth
     );
     this.pathFinderAnimator = new PathFinderAnimator<GraphPathFinder>(
@@ -72,7 +74,7 @@ export class GraphComponent implements OnInit, OnDestroy {
           case Controls.Clear:
             this.pathFinderAnimator.resetAnimation();
             this.pathFinderGraph.init(
-              window.innerHeight - 100,
+              window.innerHeight - heightOffset,
               window.innerWidth
             );
             break;
@@ -82,15 +84,15 @@ export class GraphComponent implements OnInit, OnDestroy {
   }
 
   addPoint(event) {
-    if (this.ControllerService.action$.value.title === "Add") {
+    this.ControllerService.controllerAction("Add", () => {
       this.pathFinderGraph.addNode(event.layerX, event.layerY);
-    }
+    })
   }
 
   removePoint(point: GraphNode) {
-    if (this.ControllerService.action$.value.title === "Remove") {
+    this.ControllerService.controllerAction("Remove", () => {
       this.pathFinderGraph.removeNode(point.id);
-    }
+    })
   }
 
   onMoved(val) {
