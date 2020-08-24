@@ -9,10 +9,10 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./controls.component.sass']
 })
 export class ControlsComponent implements OnInit {
-  searchTypes: SearchType[] = [SearchType.MATRIX, SearchType.GRAPH];
+  searchTypes: SearchType[] = [SearchType.GRAPH, SearchType.MATRIX];
   algorithms: Algorithm[] = [Algorithm.DIJKSTRA, Algorithm.ASTAR];
 
-  searchType: SearchType = SearchType.MATRIX;
+  searchType: SearchType = SearchType.GRAPH;
   algorithm: Algorithm = Algorithm.DIJKSTRA;
 
   optionsActive = true;

@@ -137,5 +137,8 @@
       }
     }
   },
-  "defaultProject": "pathfinder"
+  "defaultProject": "pathfinder",
+  "cli": {
+    "analytics": "0853db54-ac08-4b63-a700-16da411f6c0f"
+  }
 }

@@ -45,7 +45,7 @@ export class Action {
 export class ControllerService implements OnDestroy {
   private subscriptions: Subscription[] = [];
   public alorithm$: BehaviorSubject<Algorithm> = new BehaviorSubject(Algorithm.DIJKSTRA);
-  public searchType$: BehaviorSubject<SearchType> = new BehaviorSubject(SearchType.MATRIX);
+  public searchType$: BehaviorSubject<SearchType> = new BehaviorSubject(SearchType.GRAPH);
   public controls$: BehaviorSubject<Controls> = new BehaviorSubject(Controls.Empty);
   public contollers$: Observable<{ algorithm: Algorithm, control: Controls }> = this.controls$.pipe(
     map((control) => ({ control, algorithm: this.alorithm$.value }))
